@@ -19,9 +19,9 @@ export default function InputForm({ onSubmit }) {
   } = useForm({
     defaultValues: {
       resignDate: new Date().toISOString().slice(0, 10),
-      currentSavings: 100000,
-      dailyExpense: 200,
-      monthlyPassive: 2000,
+      currentSavings: null,
+      dailyExpense: null,
+      monthlyPassive: null,
       annualReturn: 0,
       risk: 'neutral',
       enableEvents: false
