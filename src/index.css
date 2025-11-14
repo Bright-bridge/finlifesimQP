@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gradient-bg: linear-gradient(180deg, #0f172a 0%, #311B92 60%);
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+
+.scrollbar-stealth {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+.scrollbar-stealth::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: transparent;
+}
+
+.scrollbar-stealth::-webkit-scrollbar-track {
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.scrollbar-stealth::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  transform: translateX(6px);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+.scrollbar-stealth.scrollbar-visible {
+  scrollbar-color: rgba(148, 163, 184, 0.6) rgba(15, 23, 42, 0.5);
+}
+
+.scrollbar-stealth.scrollbar-visible::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.scrollbar-stealth.scrollbar-visible::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.8), rgba(71, 85, 105, 0.95));
+  border-color: rgba(11, 15, 28, 0.8);
+  transform: translateX(0);
+}
+
+.scrollbar-stealth.scrollbar-visible::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(226, 232, 240, 0.95), rgba(148, 163, 184, 0.95));
+}
+
+.scrollbar-themed {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.6) rgba(15, 23, 42, 0.45);
+}
+
+.scrollbar-themed::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-themed::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.scrollbar-themed::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.7), rgba(71, 85, 105, 0.9));
+  border-radius: 9999px;
+  border: 1px solid rgba(15, 23, 42, 0.6);
+}
+
+.scrollbar-themed::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(226, 232, 240, 0.9), rgba(148, 163, 184, 0.9));
+}
+
+.module-scroll {
+  height: 500;
+  max-height: calc(100vh - 200px); /* 或者根据你的布局适度限制 */
+  overflow-y: auto;
+}
+
+
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* DayPicker dark theme */
+.rdp {
+  --rdp-accent-color: #F59E0B;
+  --rdp-accent-background-color: rgba(245, 158, 11, 0.2);
+  --rdp-background-color: #0b1220; /* 更低透明度，更贴合深色主题 */
+  --rdp-outline: 2px solid rgba(245, 158, 11, 0.6);
+  color: #E6E6E6;
+  background: var(--rdp-background-color);
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.rdp-months {
+  padding: 0.5rem;
+}
+.rdp-button_reset {
+  color: inherit;
+}
+.rdp-day_selected:not([disabled]),
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  background-color: var(--rdp-accent-color);
+  color: #111827;
+}
+.rdp-day_today:not(.rdp-day_selected) {
+  border: 1px solid rgba(245, 158, 11, 0.5);
+}
+.rdp-caption_label,
+.rdp-nav_button {
+  color: #E6E6E6;
+}
+
+/* 数字输入框 spinner 深色主题适配 */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  opacity: 0.6;
+  filter: invert(1) brightness(0.8);
+  cursor: pointer;
+}
+
+input[type="number"]::-webkit-inner-spin-button:hover,
+input[type="number"]::-webkit-outer-spin-button:hover {
+  opacity: 1;
+}
+
+/* Firefox 数字输入框 spinner */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
