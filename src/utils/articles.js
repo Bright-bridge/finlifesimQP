@@ -1,22 +1,95 @@
 export const articles = [
   {
     id: 'a1',
-    title: '用预算与现金流视角理解个人理财',
+    title: 'The Subtle Power of Money: How Small Choices Shape a Secure Life',
     content:
-      '很多人谈理财，第一反应是“投资买什么”，但真正的起点应该是预算与现金流管理。预算让我们在收入既定的前提下，合理分配生活与投资的优先级；现金流则告诉你每月实际可投入的资本能力。以 50/30/20 原则为例，生活必需、灵活消费与储蓄投资的比例不是一成不变，而是应当根据阶段目标与风险承受能力动态调整。当你能持续维持正向现金流，并通过自动化转账来建立投资纪律，资产积累会更稳健。对于高波动时期，建立 6–12 个月的应急金缓冲，能显著降低被动变现优质资产的概率，这比单纯追求高收益更关键。'
+        'Money has a strange way of shaping our lives, even when we pretend not to think about it. Most people don’t wake up in the morning excited to calculate their expenses or ponder investment strategies. Instead, money moves quietly in the background, nudging us in certain directions, influencing our choices, whispering doubts when it feels scarce and offering a sense of ease when it feels stable. Over time, I’ve come to realize that managing money is less about mastering complicated formulas and more about understanding how it fits into an ordinary life—messy, unpredictable, full of hopes and small habits.\n' +
+        '\n' +
+        'For many of us, the first real lesson about money comes not from school but from that moment when a bill arrives and you realize there isn’t quite enough in the account to cover it. It’s a feeling both humbling and strangely clarifying. You suddenly see your financial life not as a cloud of numbers but as something that must be shaped, tended to, understood. And in that moment, you also discover that financial stability doesn’t happen all at once. It grows from small decisions that repeat themselves quietly, almost invisibly, day after day.\n' +
+        '\n' +
+        'One of the most powerful shifts happens when you begin paying attention to where your money actually goes. Not in an obsessive or punitive way, but with the kind of curiosity you’d use when trying to understand a friend’s habits. You start noticing patterns—the food deliveries you never remembered ordering, the subscriptions you meant to cancel, the small luxuries that add comfort to your day but cost more than you assumed. There is something surprisingly grounding about seeing the truth laid out in front of you. It doesn’t make you perfect, but it makes you more aware, and that alone changes the way you behave.\n' +
+        '\n' +
+        'Savings, too, reveal their purpose in small and subtle ways. They are not only a financial cushion but an emotional one. A modest amount set aside creates a sense of distance from the unexpected, a buffer between your daily life and the chaos that sometimes intrudes. You breathe a little easier knowing that if the car breaks down or the computer dies at the worst possible moment, you won’t be thrown completely off course. This sense of relief arrives long before the savings account becomes impressive by any external measure. Even a small safety net can feel like the softest kind of reassurance.\n' +
+        '\n' +
+        'Investing often feels like an entirely different world, but at its heart, it is simply the practice of giving your future self a helping hand. Many people imagine investing as a dramatic activity—people shouting on trading floors, fortunes rising and falling in dramatic arcs. In reality, the most effective investing is quiet and almost boring. It is choosing something steady, contributing a little each month, and then resisting the urge to meddle. Over time, the money grows—not because you chased the perfect moment, but because you allowed time to do what it always does: accumulate, compound, transform.\n' +
+        '\n' +
+        'Yet no matter how much we talk about numbers, percentages, or strategies, the truth is that personal finance is ultimately shaped by lifestyle. The things you value most should naturally guide where your money flows. Some people find joy in traveling. Others love home comforts, hobbies, or long meals with friends. What matters isn’t whether these things are “necessary,” but whether they genuinely enrich your life. When your spending aligns with your values, you stop feeling guilty about the things you choose and start becoming more intentional about the things you don’t. You begin to understand the difference between living well and living expensively.\n' +
+        '\n' +
+        'And somewhere along the journey, you start to develop your own definition of wealth. For some people, wealth means owning a certain amount of money. But for many others, it means waking up without the dull, persistent worry of financial insecurity. It means not panicking when the unexpected happens. It means being able to take opportunities when they arise, even if they don’t come with guarantees. In this way, wealth becomes something quieter and more personal than the image we often see in movies or social media. It becomes a kind of stability, a deep breath you can take without hesitation.\n' +
+        '\n' +
+        'One of the most comforting truths about money is that you don’t need to start from a perfect place. You don’t need a high salary, a perfect budget, or a flawless plan. You simply start where you are, with whatever you have, and build slowly. Every dollar saved, every conscious choice, every bit of learning becomes part of a foundation that grows sturdier over time. There is no race to win, no deadline to meet. You are shaping a life, not completing a task.\n' +
+        '\n' +
+        'And as the years go by, something else happens too. You begin to trust yourself. You notice that you’re calmer when you check your account, more thoughtful when you spend, more hopeful when you plan. Money stops being a source of anxiety and becomes a tool—one that works alongside you instead of against you.\n' +
+        '\n' +
+        'If personal finance has a single lesson worth remembering, it’s this: you don’t have to strive for perfection, only progress. And with steady progress, almost without realizing it, you move toward a life that feels more secure, more intentional, and more your own.'
   },
   {
     id: 'a2',
-    title: '被动收入不是“躺赚”，是结构化增量',
+    title: 'The Quiet Art of Building Wealth in an Uncertain World',
     content:
-      '被动收入之所以被误解，常见原因在于忽视了“前期投入”与“维护治理”。例如股息与债券票息需要资本沉淀，房产租金需要管理与空置应对，数字产品亦依赖内容更新与渠道运营。理性地看，被动收入的价值在于与主动收入形成结构上的协同：当主动收入波动时，被动收入提供底层现金流稳定性；当被动收入增长到覆盖生活必需时，你便获得了选择的自由。实现路径可从小额、可复制的项目开始，结合自动化与复利，将其逐步扩展为现金流引擎。'
-  },
+      'There is a strange comfort in talking about money, even when most people say they don’t enjoy the topic. Maybe it’s because deep down we all know that our financial lives shape more of our everyday decisions than we care to admit. When I look back at the moments when I felt most financially “calm,” they were never tied to dramatic windfalls or sudden jumps in income. Instead, they came from dozens of small choices that seemed almost boring at the time—choices that slowly stitched together a sense of stability.\n' +
+        '\n' +
+        'The truth is that building wealth rarely looks like the polished success stories we hear from others. It’s much quieter. It’s the habit of opening your banking app even when you’re scared you overspent. It’s the moment you decide to stop buying things just to distract yourself from the stress of a long day. It’s the slight shift in mindset when you stop asking “How fast can I get rich?” and instead ask, “How can I make my future self’s life easier?”\n' +
+        '\n' +
+        'People talk a lot about budgeting, and for a long time I treated it as some kind of chore—something restrictive that boxed me in. Then I changed one small thing: instead of forcing myself onto a strict plan, I began tracking my spending like I was studying a puzzle. I wasn’t judging myself, just observing. Eventually, patterns appeared. I discovered that certain purchases never improved my life in any meaningful way, while others—like good food, books, or travel—were genuinely worth keeping. When money starts to align with what you actually value, managing it stops feeling like punishment.\n' +
+        '\n' +
+        'Savings come from the same quiet place. There is nothing glamorous about putting aside small amounts that feel insignificant at first. But the day you check the balance and realize the numbers suddenly look like something meaningful, something protective, you understand why people say consistency matters more than intensity. And what’s interesting is that saving becomes easier once you view it not as deprivation but as a gift to yourself. A kind of message to your future life saying, “I’ve got your back.”\n' +
+        '\n' +
+        'Investing carries its own emotional journey. The markets rise, they fall, they confuse everyone, and yet the basic principle rarely changes: time does more work than any one person can. I learned early on that trying to outsmart every twist in the market only added stress, not returns. But choosing a few things I understood—simple index funds, long-term plans, conservative strategies—allowed me to breathe. Wealth built slowly doesn’t feel exciting in the moment, but it becomes something incredibly comforting over years.\n' +
+        '\n' +
+        'There is also the part of financial life that nobody warns you about: the emotional side. Money has a way of exposing our fears, habits, insecurities, and even how we were raised. Some of us spend to impress people we don’t even like. Some of us hoard money because we fear losing control. Others avoid financial decisions entirely because they’re terrified of making mistakes. Understanding how you emotionally relate to money is often more important than understanding every technical detail. Once you see your patterns clearly, you can reshape them.\n' +
+        '\n' +
+        'And perhaps the most reassuring thing is that financial stability is not a race. It doesn’t matter if someone else reached a milestone earlier or earns more or seems more knowledgeable. What matters is that you are moving at a rhythm you can sustain. Most “overnight successes” took years of quiet foundation-building that nobody saw.\n' +
+        '\n' +
+        'In the end, managing money is less about chasing wealth and more about building a life that feels spacious—where you have room to breathe, choose, rest, and take opportunities as they appear. It’s about creating a future where you don’t constantly feel like you’re catching up. The journey is long, sometimes slow, sometimes uncertain, but it’s also deeply personal. And somewhere along the way, you realize that the real reward isn’t just the financial security itself, but the sense of confidence and calm that grows with it.\n' +
+        '\n' +
+        'If there’s one thing worth remembering, it’s that your financial life is not defined by one decision or one mistake. It’s shaped by your habits, your patience, and the quiet choices you make day after day—choices that slowly, steadily build the life you want.' },
   {
     id: 'a3',
-    title: '复利的边界与落地：收益率、时间与行为',
+    title: 'When Money Becomes a Mirror of How We Live',
     content:
-      '复利是理财中最具穿透力的概念，但它并非魔法。年化收益率的提升、时间维度的延长与行为的一致性，缺一不可。对于普通投资者，更重要的是避免大幅回撤，因为回本需要的涨幅总是更高。稳健的做法是：确保现金流安全边际，逐步定投分散资产，控制单一品类集中度；当市场极端波动时，遵循预设的再平衡规则，而非情绪化操作。复利的真正难点在“长期可执行”，而非纸面上的收益率对比。'
-  }
+      'There are days when thinking about money feels strangely similar to thinking about time. Both slip away quietly if we don’t pay attention, and both reveal who we really are when we finally stop and take a closer look. I’ve noticed that the moments when my finances start to drift off course often match the moments when life itself feels scattered—too many rushed decisions, too much noise, not enough intention. It’s as if money acts like a mirror, not just reflecting what we earn and spend, but showing the pace, priorities, and pressures we carry with us.\n' +
+        '\n' +
+        'For a long stretch of my early adulthood, I operated on a simple formula: work hard, spend what I earned, and hope things naturally improved. But time has a way of showing us that hope isn’t a plan. I remember sitting at my desk late one evening, staring at a bank statement that didn’t seem to match the effort I felt I had put into my life. There’s a particular discomfort that comes with realizing you’ve been coasting. But sometimes that discomfort is exactly the push you need.\n' +
+        '\n' +
+        'When I first started paying attention to where my money went, I was surprised by how unconscious some patterns were. It wasn’t the big expenses that threw me off balance—it was the slow drip of “just this once” decisions. A snack here, a small gadget there, a weekend outing that I didn’t even enjoy as much as I thought I would. Individually, none of them mattered. But together, they quietly rewrote my financial story without my permission.\n' +
+        '\n' +
+        'Eventually I understood that the hardest part of managing money isn’t the math. It’s the honesty. It’s admitting that we sometimes spend to avoid boredom or stress. It’s acknowledging that we sometimes buy things to feel in control when life seems unpredictable. And it’s recognizing that our financial habits don’t exist in isolation—they’re shaped by our mood, our surroundings, and the version of ourselves we’re trying to become.\n' +
+        '\n' +
+        'But here’s the quiet beauty of this realization: once you start paying attention, even a little, things begin to shift. Tracking my expenses didn’t magically make me wealthier, but it made me more aware. And awareness is powerful. It helps you pause before you hit “buy.” It helps you choose long-term comfort over short-term impulse. It helps you understand the difference between spending money to live and spending money to fill a void.\n' +
+        '\n' +
+        'Saving also became easier once I stopped treating it like a sacrifice. There was a moment when I realized that every amount I put away—no matter how small—was a promise to my future self. I wasn’t depriving myself; I was quietly building a future where stress had less power over me. That shift in perspective made consistency feel more natural. Over time, the numbers grew—slowly, but unmistakably—and with them came a sense of steadiness I hadn’t felt before.\n' +
+        '\n' +
+        'Investing entered my life in much the same way: not through excitement, but through patience. I didn’t chase trends or try to predict the next big thing. Instead, I learned to trust simple principles that have stood the test of decades. Markets rise and fall, but time smooths the chaos. You don’t need perfect timing; you just need discipline and a plan you can stick to. There’s a peace that comes from letting go of the urge to control every twist and turn.\n' +
+        '\n' +
+        'What surprised me most about all of this is how much personal growth came along with financial growth. As I learned to manage my money, I also learned to manage my impulses, my fears, and my expectations. I became more intentional—not just with spending, but with how I structured my days, how I valued my work, and how I defined “enough.”\n' +
+        '\n' +
+        'And maybe that’s why money feels like a mirror. It reflects the patterns we don’t always notice and the priorities we don’t always admit. It shows us when we’re running too fast or living without direction. But it also shows us our potential—how capable we are of change, how much progress can come from small, steady effort, and how different life feels when we take control instead of drifting.\n' +
+        '\n' +
+        'In the end, the real goal isn’t simply to accumulate wealth. It’s to create a life where we feel grounded, supported, and free. A life where opportunities don’t slip away because we’re unprepared. A life where our financial decisions align with who we want to become, not who we’ve been.\n' +
+        '\n' +
+        'Money, in its simplest form, is a tool. But in its deeper form, it becomes a story—a story we rewrite a little every day. And with intent, patience, and awareness, it can become a story we’re proud to read back years later.'
+  },
+    {
+        id: 'a4',
+        title: 'The Invisible Threads of Financial Life',
+        content:
+            'Money is one of those things we talk about rarely, but its influence is inescapable. It drifts through our lives in ways that are subtle and often unnoticed. A forgotten subscription renews, a small indulgence here and there piles up, and suddenly, what seemed like a comfortable balance starts to feel tight. Over time, I’ve realized that understanding money isn’t about mastering spreadsheets or memorizing investment terms. It’s about recognizing the invisible threads it weaves through our daily decisions, shaping how we live, how we think, and even how we feel.\n' +
+            '\n' +
+            'For a long time, I treated money as something external—numbers in an account that somehow dictated my life. I thought the solution was simple: earn more, spend less, save a little. Yet, life rarely follows such neat formulas. There were moments when despite earning more than I had a few years before, I felt less secure. That was when I understood that financial wellness is not about the absolute size of your account balance but about clarity, control, and intention.\n' +
+            '\n' +
+            'The first step, I discovered, is awareness. You can’t improve what you don’t see. I began noting every expense, not as a punishment or a rigid accounting exercise, but like tracing the flow of a river. Watching where money went each week revealed patterns I hadn’t noticed before. Tiny habits that seemed harmless—daily coffee runs, impulse purchases online, small unplanned dinners—were quietly eroding my sense of financial control. The realization was humbling, but it was also empowering. Once you can see clearly, you can begin to choose consciously.\n' +
+            '\n' +
+            'Saving, as I’ve come to understand, is both practical and emotional. On the surface, it’s about having a cushion for emergencies or building a future. On a deeper level, it provides peace of mind. Even modest savings can create a sense of distance between everyday life and unforeseen challenges. You feel lighter, less reactive, more capable of handling whatever comes. And the beauty of it is that you don’t need to start big. Small, regular contributions accumulate over time, and the habit itself becomes a form of stability that compounds along with the money.\n' +
+            '\n' +
+            'Investing is another quiet force in building a life that feels secure. It can be intimidating at first—the numbers, the charts, the stories of gains and losses—but over time I learned that the most effective approach is often the simplest. Steady contributions, diversified assets, patience, and time. It isn’t thrilling, and it isn’t glamorous, but it works. Over years, the slow, consistent growth of investments creates freedom and options, and the confidence that comes with it is as valuable as any monetary gain.\n' +
+            '\n' +
+            'I also came to appreciate the emotional aspect of money. Our habits, fears, and desires are embedded in the way we spend, save, and invest. Some of us spend to soothe anxiety, some of us hoard out of fear, and some of us ignore money because it’s easier than facing our habits. Understanding this connection—how financial choices mirror emotional patterns—is crucial. When you acknowledge it, you can start to reshape it. Money becomes less of a stressor and more of a tool to build the life you want.\n' +
+            '\n' +
+            'One of the most important lessons I’ve learned is that financial life is not a competition. Comparing your progress to someone else’s only brings unnecessary stress. Each person’s circumstances, goals, and values are different. True financial wellness comes from aligning your actions with your own life, not someone else’s expectations. Small, deliberate choices made consistently over time often have more impact than any dramatic move or sudden windfall.\n' +
+            '\n' +
+            'In the end, money is not the goal—it’s the medium through which we construct a life of freedom, choice, and stability. Every decision we make, from the smallest daily purchase to the long-term investment, writes the story of how we live. With patience, awareness, and intentionality, that story can become one we look back on with pride, a reflection of resilience, thoughtfulness, and the quiet art of living well.' }
+
 ];
 
 export function getArticleById(id) {
