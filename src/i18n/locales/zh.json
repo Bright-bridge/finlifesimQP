@@ -1,0 +1,156 @@
+{
+  "common": {
+    "appName": "Financial Life Simulator",
+    "startSimulation": "开始模拟",
+    "days": "天",
+    "noRisk": "暂无耗尽风险",
+    "suggestions": "建议：",
+    "dataSource": "数据来源",
+    "algorithmVersion": "算法版本",
+    "eventPoolVersion": "事件池",
+    "exportJSON": "导出 JSON",
+    "exportCSV": "导出 CSV"
+  },
+  "nav": {
+    "home": "首页",
+    "calculator": "预算计算器",
+    "articles": "理财文章",
+    "about": "关于",
+    "contact": "联系我们",
+    "backToHome": "返回首页"
+  },
+  "articles": {
+    "title": "理财文章",
+    "description": "预算、被动收入、复利与储蓄策略等原创理财内容，用于教育用途。",
+    "readMore": "阅读详情",
+    "backToList": "← 返回文章列表",
+    "detailMeta": "{{title}} - 理财教育内容"
+  },
+  "home": {
+    "title": "首页",
+    "subtitle": "Financial Life Simulator 是一款面向个人用户的财务模拟工具。输入你的储蓄、每月支出与被动收入，系统将基于可配置的年化收益与随机生活事件，模拟未来数月资金变化并提供量化的理财建议。该工具仅用于教育与规划参考，不构成投资建议。",
+    "startNow": "立即开始",
+    "readArticles": "阅读理财文章",
+    "whyChoose": "为什么选择本工具",
+    "compliance": "合规与透明",
+    "complianceDesc": "清晰的数据来源标记、隐私与免责声明页面，更适用于审核与教育用途。",
+    "visualization": "量化可视化",
+    "visualizationDesc": "月度结余、趋势与结构图一体展示，帮助建立现金流与风险的直观认知。",
+    "realistic": "贴近现实",
+    "realisticDesc": "固定支出、投资收益与随机事件并行模拟，支持不同风险偏好配置。"
+  },
+  "calculator": {
+    "title": "预算计算器",
+    "resignDate": "辞职时间",
+    "currentSavings": "当前储蓄",
+    "currentSavingsUnit": "元",
+    "dailyExpense": "每日开销",
+    "dailyExpenseUnit": "元",
+    "monthlyPassive": "被动收入（每月）",
+    "annualReturn": "年化收益率（0–1，可选，不投资可填0）",
+    "risk": "风险偏好",
+    "riskConservative": "保守",
+    "riskNeutral": "中性",
+    "riskAggressive": "激进",
+    "enableEvents": "启用随机事件",
+    "required": "必填",
+    "minValue": "> 0",
+    "minValueZero": ">= 0",
+    "tip": "提示：勾选\"启用随机事件\"后，系统会在每月生成 0–3 条收入/支出/通胀事件用于模拟。",
+    "selectDate": "选择日期"
+  },
+  "result": {
+    "title": "结果",
+    "daysSupported": "可支撑天数",
+    "expectedDepletionDate": "预计耗尽日期",
+    "healthScore": "理财健康评分",
+    "simulationAssumptions": "模拟假设",
+    "riskProfile": "风险偏好",
+    "expectedAnnualReturn": "期望年化收益率",
+    "monthlyPassiveIncome": "月度被动收入",
+    "dailyExpense": "每日开销",
+    "randomEvents": "随机事件",
+    "enabled": "已启用",
+    "disabled": "未启用",
+    "timeline": "事件与月度详情",
+    "charts": "图表分析",
+    "table": "财务报表",
+    "living": "生活",
+    "investment": "投资",
+    "events": "事件",
+    "balanceTrend": "余额趋势",
+    "incomeExpense": "收入/支出",
+    "expenseStructure": "支出结构",
+    "cashflowTrend": "净现金流走势",
+    "monthNetCashflow": "本月净现金流",
+    "endBalance": "期末余额"
+  },
+  "table": {
+    "title": "财务报表",
+    "month": "月份",
+    "income": "收入",
+    "expense": "支出",
+    "eventChange": "事件变动",
+    "monthNet": "本月结余",
+    "balanceAfter": "剩余余额",
+    "monthLabel": "第 {{month}} 月"
+  },
+  "bubble": {
+    "monthLabel": "第 {{month}} 月",
+    "balance": "余额",
+    "passiveIncome": "被动收入",
+    "investmentReturn": "投资收益",
+    "fixedExpense": "固定支出",
+    "eventsTotal": "事件合计",
+    "monthNet": "本月结余",
+    "events": "事件"
+  },
+  "chat": {
+    "remainingBalance": "剩余余额",
+    "description": "显示基于每月的被动收入、固定支出、投资收益与随机事件的累计结果。"
+  },
+  "about": {
+    "title": "关于 Financial Life Simulator",
+    "intro1": "Financial Life Simulator 是一款面向个人用户的轻量级财务模拟工具。",
+    "intro2": "你只需输入当前储蓄、每月支出、被动收入等基本数据，系统就会基于可配置的年化收益率和模拟事件，推演你未来数月的资金变化，帮助你更直观地理解自己的生活\"可支撑时间\"。",
+    "philosophy": "💡 我们的理念",
+    "philosophy1": "在不确定的时代，每个人都需要对自己的财务状况有更加透明、直接的认知。",
+    "philosophy2": "Financial Life Simulator 的目标是：",
+    "philosophy3": "让个人能快速了解\"如果我辞职，我能活多久？\"",
+    "philosophy4": "用简单直观的方式展示现金流变化",
+    "philosophy5": "帮助用户做更理性、可控的生活规划",
+    "philosophy6": "让财务思考变得更轻松，不再复杂",
+    "philosophy7": "本工具不提供投资建议，只提供一种\"生活模拟器\"的视角。",
+    "features": "🔧 核心功能",
+    "feature1": "储蓄寿命模拟：根据你的数据推算未来的资金变化",
+    "feature2": "可调节参数：年化收益率、支出、被动收入等全部可配置",
+    "feature3": "随机事件系统：引入生活中不可控因素，让模拟更贴近真实",
+    "feature4": "图表可视化：用曲线展示资产变化趋势",
+    "feature5": "结果分析：为你提供简单、量化的参考建议",
+    "why": "🎯 为什么做这个工具？",
+    "why1": "大多数人并不清楚自己能支撑多久，也无法直观感受到某个消费习惯会带来什么影响。",
+    "why2": "我希望做一个：",
+    "why3": "不需要懂金融也能用",
+    "why4": "不需要复杂公式",
+    "why5": "不需要登录或提供任何隐私数据",
+    "why6": "能让人瞬间理解自己财务健康状况",
+    "why7": "的模拟工具。",
+    "limitations": "⚠️ 使用范围与限制",
+    "limitation1": "Financial Life Simulator 的所有结果都基于模型推算，仅代表一种可能的未来情景，不构成任何投资、金融或法律建议。",
+    "limitation2": "模拟结果可能受参数设定与模型简化影响，与实际情况存在差异，用户应自行判断。",
+    "privacy": "隐私政策",
+    "disclaimer": "免责声明"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "content": "生效日期：2025年11月13日\n\n感谢您使用本网站（以下简称\"本网站\"或\"我们\"）。我们非常重视您的隐私与数据安全。本隐私政策旨在说明我们如何收集、使用、存储和保护您的信息。\n\n一、我们收集的信息\n\n在您使用本网站的过程中，我们不会收集任何可识别您个人身份的信息（如姓名、身份证号、联系方式等）。\n\n我们仅在您自愿填写时，收集以下非个人信息，用于计算和模拟您的财务状况：\n\n当前储蓄金额\n\n每月或每日支出金额\n\n每月收入或被动收入（可选）\n\n投资收益率（可选）\n\n所有数据仅用于在您当前浏览会话中进行理财模拟与展示结果，不会被永久保存或传输至任何第三方服务器。\n\n二、信息的使用方式\n\n您提供的数据仅用于以下目的：\n\n在浏览器端（本地）计算理财模拟结果；\n\n向您展示可视化结果和财务趋势预测；\n\n改进网站功能与用户体验（仅使用匿名的统计数据）。\n\n我们不会基于您的输入进行广告推送、用户画像分析，或与第三方共享数据。\n\n三、信息的存储与安全\n\n您输入的数据仅暂存在浏览器内存中（或本地缓存中），不会被上传至服务器。\n\n一旦您刷新或关闭页面，数据将自动清除。\n\n我们不会建立任何用户账户或数据档案。\n\n四、第三方服务\n\n本网站可能使用以下第三方服务来改进性能或统计访问情况：\n\n网站托管服务（如 Vercel、Netlify 或 GitHub Pages）；\n\n匿名访问分析（如 Google Analytics，仅记录访问次数和页面浏览量，不关联个人数据）。\n\n我们仅选择符合数据保护要求的第三方服务，并确保其不会访问您的输入数据。\n\n五、您的权利\n\n由于我们不收集或保存可识别个人身份的数据，因此您无需执行数据删除或导出操作。\n\n若您有任何关于隐私或数据安全的问题，可通过以下方式联系我们。\n\n六、联系我们\n\n如您对本隐私政策有任何疑问、建议或投诉，请联系我们：\n\n📧 联系邮箱：support@yourdomain.com\n\n🌐 网站地址：https://finlifesim.com\n\n七、政策更新\n\n我们可能会不时更新本隐私政策。更新后的版本将在本页面上发布，并立即生效。"
+  },
+  "disclaimer": {
+    "title": "免责声明（Disclaimer）",
+    "content": "Financial Life Simulator（以下简称\"本工具\"）是一款面向个人用户的财务模拟工具。用户通过输入储蓄、每月支出、被动收入及其他可选参数，本工具会基于可配置的年化收益率、随机生活事件以及模拟模型，对未来的资金变化进行推演。本工具的所有输出内容，包括但不限于：模拟结果、图表、建议、分析文字，仅用于教育、体验与规划参考。\n\n请您注意：\n\n本工具不构成任何形式的投资建议、金融建议或专业咨询服务。\n\n模拟结果受模型假设、设定参数、随机事件和计算方式影响，不保证其准确性、完整性或实现可能性。\n\n本工具不对因使用模拟结果或依赖相关内容所导致的任何损失、风险或不良后果承担责任。\n\n用户应根据自身情况谨慎决策，必要时应咨询具备资质的专业顾问或金融服务机构。\n\n使用本工具即表示您理解并接受上述内容。\n\n如您不同意此免责声明，请立即停止使用本工具。"
+  },
+  "footer": {
+    "description": "本工具仅用于教育与规划参考，不构成投资建议。请在做出重要财务决策前咨询专业人士。"
+  }
+}
+

@@ -1,0 +1,156 @@
+{
+  "common": {
+    "appName": "Financial Life Simulator",
+    "startSimulation": "Start Simulation",
+    "days": "days",
+    "noRisk": "No depletion risk",
+    "suggestions": "Suggestions:",
+    "dataSource": "Data Source",
+    "algorithmVersion": "Algorithm Version",
+    "eventPoolVersion": "Event Pool",
+    "exportJSON": "Export JSON",
+    "exportCSV": "Export CSV"
+  },
+  "nav": {
+    "home": "Home",
+    "calculator": "Calculator",
+    "articles": "Articles",
+    "about": "About",
+    "contact": "Contact",
+    "backToHome": "Back to Home"
+  },
+  "articles": {
+    "title": "Articles",
+    "description": "Original budgeting, passive income, and savings content for educational purposes.",
+    "readMore": "Read more",
+    "backToList": "← Back to articles",
+    "detailMeta": "{{title}} - Financial education"
+  },
+  "home": {
+    "title": "Home",
+    "subtitle": "Financial Life Simulator is a financial simulation tool for individual users. Enter your savings, monthly expenses, and passive income, and the system will simulate future monthly financial changes based on configurable annual returns and random life events, providing quantified financial advice. This tool is for educational and planning purposes only and does not constitute investment advice.",
+    "startNow": "Get Started",
+    "readArticles": "Read Articles",
+    "whyChoose": "Why Choose This Tool",
+    "compliance": "Compliance & Transparency",
+    "complianceDesc": "Clear data source labeling, privacy and disclaimer pages, more suitable for review and educational purposes.",
+    "visualization": "Quantitative Visualization",
+    "visualizationDesc": "Monthly balance, trends and structure charts displayed together to help build intuitive understanding of cash flow and risk.",
+    "realistic": "Realistic",
+    "realisticDesc": "Fixed expenses, investment returns and random events are simulated in parallel, supporting different risk preference configurations."
+  },
+  "calculator": {
+    "title": "Budget Calculator",
+    "resignDate": "Resignation Date",
+    "currentSavings": "Current Savings",
+    "currentSavingsUnit": "USD",
+    "dailyExpense": "Daily Expense",
+    "dailyExpenseUnit": "USD",
+    "monthlyPassive": "Passive Income (Monthly)",
+    "annualReturn": "Annual Return Rate (0-1, optional, enter 0 if not investing)",
+    "risk": "Risk Preference",
+    "riskConservative": "Conservative",
+    "riskNeutral": "Neutral",
+    "riskAggressive": "Aggressive",
+    "enableEvents": "Enable Random Events",
+    "required": "Required",
+    "minValue": "> 0",
+    "minValueZero": ">= 0",
+    "tip": "Tip: After checking \"Enable Random Events\", the system will generate 0-3 income/expense/inflation events per month for simulation.",
+    "selectDate": "Select Date"
+  },
+  "result": {
+    "title": "Results",
+    "daysSupported": "Days Supported",
+    "expectedDepletionDate": "Expected Depletion Date",
+    "healthScore": "Financial Health Score",
+    "simulationAssumptions": "Simulation Assumptions",
+    "riskProfile": "Risk Profile",
+    "expectedAnnualReturn": "Expected Annual Return Rate",
+    "monthlyPassiveIncome": "Monthly Passive Income",
+    "dailyExpense": "Daily Expense",
+    "randomEvents": "Random Events",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "timeline": "Events & Monthly Details",
+    "charts": "Chart Analysis",
+    "table": "Financial Statement",
+    "living": "Living",
+    "investment": "Investment",
+    "events": "Events",
+    "balanceTrend": "Balance Trend",
+    "incomeExpense": "Income/Expense",
+    "expenseStructure": "Expense Structure",
+    "cashflowTrend": "Cashflow Trend",
+    "monthNetCashflow": "Month Net Cashflow",
+    "endBalance": "End Balance"
+  },
+  "table": {
+    "title": "Financial Statement",
+    "month": "Month",
+    "income": "Income",
+    "expense": "Expense",
+    "eventChange": "Event Change",
+    "monthNet": "Month Net",
+    "balanceAfter": "Remaining Balance",
+    "monthLabel": "Month {{month}}"
+  },
+  "bubble": {
+    "monthLabel": "Month {{month}}",
+    "balance": "Balance",
+    "passiveIncome": "Passive Income",
+    "investmentReturn": "Investment Return",
+    "fixedExpense": "Fixed Expense",
+    "eventsTotal": "Events Total",
+    "monthNet": "Month Net",
+    "events": "Events"
+  },
+  "chat": {
+    "remainingBalance": "Remaining Balance",
+    "description": "Shows cumulative results based on monthly passive income, fixed expenses, investment returns and random events."
+  },
+  "about": {
+    "title": "About Financial Life Simulator",
+    "intro1": "Financial Life Simulator is a lightweight financial simulation tool for individual users.",
+    "intro2": "You only need to enter basic data such as current savings, monthly expenses, and passive income, and the system will simulate your financial changes over the next few months based on configurable annual return rates and simulation events, helping you more intuitively understand your \"supportable time\".",
+    "philosophy": "💡 Our Philosophy",
+    "philosophy1": "In uncertain times, everyone needs a more transparent and direct understanding of their financial situation.",
+    "philosophy2": "The goals of Financial Life Simulator are:",
+    "philosophy3": "Let individuals quickly understand \"If I resign, how long can I survive?\"",
+    "philosophy4": "Display cash flow changes in a simple and intuitive way",
+    "philosophy5": "Help users make more rational and controllable life planning",
+    "philosophy6": "Make financial thinking easier, no longer complicated",
+    "philosophy7": "This tool does not provide investment advice, only a \"life simulator\" perspective.",
+    "features": "🔧 Core Features",
+    "feature1": "Savings lifespan simulation: Calculate future financial changes based on your data",
+    "feature2": "Adjustable parameters: Annual return rate, expenses, passive income, etc. are all configurable",
+    "feature3": "Random event system: Introduce uncontrollable factors in life to make simulations more realistic",
+    "feature4": "Chart visualization: Display asset change trends with curves",
+    "feature5": "Result analysis: Provide you with simple, quantified reference suggestions",
+    "why": "🎯 Why Build This Tool?",
+    "why1": "Most people don't know how long they can support themselves, and can't intuitively feel the impact of certain spending habits.",
+    "why2": "I want to create:",
+    "why3": "A tool that doesn't require financial knowledge to use",
+    "why4": "No complex formulas needed",
+    "why5": "No login or provision of any private data required",
+    "why6": "A tool that allows people to instantly understand their financial health",
+    "why7": "simulation tool.",
+    "limitations": "⚠️ Scope and Limitations",
+    "limitation1": "All results of Financial Life Simulator are based on model calculations and only represent a possible future scenario, and do not constitute any investment, financial or legal advice.",
+    "limitation2": "Simulation results may be affected by parameter settings and model simplifications, and may differ from actual situations. Users should make their own judgments.",
+    "privacy": "Privacy Policy",
+    "disclaimer": "Disclaimer"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "content": "Effective Date: November 13, 2025\n\nThank you for using this website (hereinafter referred to as \"this website\" or \"we\"). We highly value your privacy and data security. This privacy policy aims to explain how we collect, use, store and protect your information.\n\nI. Information We Collect\n\nDuring your use of this website, we do not collect any personally identifiable information (such as name, ID number, contact information, etc.).\n\nWe only collect the following non-personal information when you voluntarily fill it in, for calculating and simulating your financial situation:\n\nCurrent savings amount\n\nMonthly or daily expense amount\n\nMonthly income or passive income (optional)\n\nInvestment return rate (optional)\n\nAll data is only used for financial simulation and result display in your current browsing session, and will not be permanently saved or transmitted to any third-party server.\n\nII. How We Use Information\n\nYour provided data is only used for the following purposes:\n\nCalculate financial simulation results on the browser side (locally);\n\nDisplay visualization results and financial trend predictions to you;\n\nImprove website functionality and user experience (using only anonymous statistical data).\n\nWe will not use your input for advertising, user profiling, or sharing data with third parties.\n\nIII. Information Storage and Security\n\nYour entered data is only temporarily stored in browser memory (or local cache) and will not be uploaded to the server.\n\nOnce you refresh or close the page, the data will be automatically cleared.\n\nWe do not establish any user accounts or data files.\n\nIV. Third-Party Services\n\nThis website may use the following third-party services to improve performance or statistics:\n\nWebsite hosting services (such as Vercel, Netlify or GitHub Pages);\n\nAnonymous access analytics (such as Google Analytics, only recording visit counts and page views, not associated with personal data).\n\nWe only choose third-party services that meet data protection requirements and ensure they do not access your input data.\n\nV. Your Rights\n\nSince we do not collect or save personally identifiable data, you do not need to perform data deletion or export operations.\n\nIf you have any questions about privacy or data security, please contact us through the following methods.\n\nVI. Contact Us\n\nIf you have any questions, suggestions or complaints about this privacy policy, please contact us:\n\n📧 Contact Email: support@yourdomain.com\n\n🌐 Website: https://finlifesim.com\n\nVII. Policy Updates\n\nWe may update this privacy policy from time to time. The updated version will be published on this page and will take effect immediately."
+  },
+  "disclaimer": {
+    "title": "Disclaimer",
+    "content": "Financial Life Simulator (hereinafter referred to as \"this tool\") is a financial simulation tool for individual users. Users input savings, monthly expenses, passive income and other optional parameters, and this tool will simulate future financial changes based on configurable annual return rates, random life events and simulation models. All output content of this tool, including but not limited to: simulation results, charts, suggestions, and analysis text, is for educational, experiential and planning reference only.\n\nPlease note:\n\nThis tool does not constitute any form of investment advice, financial advice or professional consulting services.\n\nSimulation results are affected by model assumptions, set parameters, random events and calculation methods, and their accuracy, completeness or feasibility is not guaranteed.\n\nThis tool does not assume responsibility for any losses, risks or adverse consequences caused by using simulation results or relying on related content.\n\nUsers should make decisions carefully based on their own circumstances, and should consult qualified professional advisors or financial service institutions when necessary.\n\nUsing this tool means you understand and accept the above content.\n\nIf you do not agree with this disclaimer, please stop using this tool immediately."
+  },
+  "footer": {
+    "description": "This tool is for educational and planning purposes only and does not constitute investment advice. Please consult professionals before making important financial decisions."
+  }
+}
+

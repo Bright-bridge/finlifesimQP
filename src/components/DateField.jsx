@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
+import { useTranslation } from 'react-i18next';
 import 'react-day-picker/dist/style.css';
 import { motion } from 'framer-motion';
 
@@ -10,7 +11,8 @@ function formatYMD(date) {
   return d.toISOString().slice(0, 10);
 }
 
-export default function DateField({ value, onChange, id = 'resignDate', label = '日期' }) {
+export default function DateField({ value, onChange, id = 'resignDate', label }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const selected = useMemo(() => {
     if (!value) return undefined;
@@ -35,7 +37,7 @@ export default function DateField({ value, onChange, id = 'resignDate', label = 
         aria-haspopup="dialog"
         aria-expanded={open}
       >
-        {value || '选择日期'}
+        {value || t('calculator.selectDate')}
       </button>
       {open && (
         <motion.div

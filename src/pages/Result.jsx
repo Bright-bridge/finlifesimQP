@@ -1,5 +1,7 @@
+import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ResultCard from '../components/ResultCard.jsx';
 import AnalyticsPanel from '../components/AnalyticsPanel.jsx';
 import MonthlyTable from '../components/MonthlyTable.jsx';
@@ -7,9 +9,10 @@ import { buildStatsFromSummaries } from '../utils/financeCalc.js';
 import ChatSimulation from '../components/ChatSimulation.jsx';
 import Section from '../components/Section.jsx';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs.jsx';
-import { useEffect } from 'react';
+import { formatCurrency } from '../utils/currency.js';
 
 export default function Result() {
+  const { t } = useTranslation();
   const { state } = useLocation();
   const navigate = useNavigate();
   const simulation = state?.simulation;
@@ -27,9 +30,9 @@ export default function Result() {
   const stats = buildStatsFromSummaries(summaries, resignDate, { metadata });
 
   const breakdown = {
-    生活: summaries.reduce((acc, s) => acc + s.fixedExpenses, 0),
-    投资: summaries.reduce((acc, s) => acc + (s.investmentReturn < 0 ? Math.abs(s.investmentReturn) : 0), 0),
-    事件: summaries.reduce(
+    [t('result.living')]: summaries.reduce((acc, s) => acc + s.fixedExpenses, 0),
+    [t('result.investment')]: summaries.reduce((acc, s) => acc + (s.investmentReturn < 0 ? Math.abs(s.investmentReturn) : 0), 0),
+    [t('result.events')]: summaries.reduce(
       (acc, s) =>
         acc +
         (s.events || []).reduce((acc2, e) => (e.amount < 0 ? acc2 + Math.abs(e.amount) : acc2), 0),
@@ -74,16 +77,16 @@ export default function Result() {
   return (
     <div className="space-y-5 px-1 sm:px-2">
       <Helmet>
-        <title>结果 | Financial Life Simulator</title>
-        <meta name="description" content="查看可支撑天数、预计耗尽日期、理财评分与图表分析。" />
+        <title>{t('result.title')} | {t('common.appName')}</title>
+        <meta name="description" content={t('result.title')} />
       </Helmet>
 
       <Section>
         <div className="text-sm text-slate-300">
-          数据来源：{apiStatus}
+          {t('common.dataSource')}：{apiStatus}
           {metadata.usedBackend != null && (
             <span className="ml-2 text-xs text-slate-400">
-              （算法版本 {metadata.algorithmVersion || 'v2.0'} · 事件池 {metadata.eventPoolVersion || '2025-02'}）
+              （{t('common.algorithmVersion')} {metadata.algorithmVersion || 'v2.0'} · {t('common.eventPoolVersion')} {metadata.eventPoolVersion || '2025-02'}）
             </span>
           )}
         </div>
@@ -96,28 +99,28 @@ export default function Result() {
       <Section delay={0.05}>
         <div className="rounded-2xl border border-white/10 bg-slate-900/70 px-5 py-4 shadow-inner shadow-black/30">
           <div className="flex items-center justify-between">
-            <div className="text-lg font-semibold text-white">模拟假设</div>
+            <div className="text-lg font-semibold text-white">{t('result.simulationAssumptions')}</div>
             <div className="rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1 text-xs text-amber-300">
-              风险偏好 · {metadata.riskProfile || 'neutral'}
+              {t('result.riskProfile')} · {metadata.riskProfile || 'neutral'}
             </div>
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                label: '期望年化收益率',
+                label: t('result.expectedAnnualReturn'),
                 value: `${(Number(metadata.annualReturn ?? 0) * 100).toFixed(2)}%`
               },
               {
-                label: '月度被动收入',
-                value: `¥${Number(metadata.monthlyPassive ?? summaries[0]?.passiveIncome ?? 0).toFixed(2)}`
+                label: t('result.monthlyPassiveIncome'),
+                value: formatCurrency(Number(metadata.monthlyPassive ?? summaries[0]?.passiveIncome ?? 0))
               },
               {
-                label: '每日开销',
-                value: `¥${Number(metadata.dailyExpense ?? 0).toFixed(2)}`
+                label: t('result.dailyExpense'),
+                value: formatCurrency(Number(metadata.dailyExpense ?? 0))
               },
               {
-                label: '随机事件',
-                value: metadata.enableRandomEvents === false ? '未启用' : '已启用'
+                label: t('result.randomEvents'),
+                value: metadata.enableRandomEvents === false ? t('result.disabled') : t('result.enabled')
               }
             ].map((item) => (
               <div
@@ -136,9 +139,9 @@ export default function Result() {
         <Section delay={0.06}>
           <Tabs defaultValue="timeline">
             <TabsList className="grid gap-2 sm:grid-cols-3 w-full">
-              <TabsTrigger value="timeline">事件与月度详情</TabsTrigger>
-              <TabsTrigger value="charts">图表分析</TabsTrigger>
-              <TabsTrigger value="table">财务报表</TabsTrigger>
+              <TabsTrigger value="timeline">{t('result.timeline')}</TabsTrigger>
+              <TabsTrigger value="charts">{t('result.charts')}</TabsTrigger>
+              <TabsTrigger value="table">{t('result.table')}</TabsTrigger>
             </TabsList>
 
             {['timeline', 'charts', 'table'].map((tab) => (
@@ -164,16 +167,16 @@ export default function Result() {
           <button
             className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-4 py-2 rounded-lg"
             onClick={jsonExport}
-            aria-label="导出JSON"
+            aria-label={t('common.exportJSON')}
           >
-            导出 JSON
+            {t('common.exportJSON')}
           </button>
           <button
             className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-4 py-2 rounded-lg"
             onClick={csvExport}
-            aria-label="导出CSV"
+            aria-label={t('common.exportCSV')}
           >
-            导出 CSV
+            {t('common.exportCSV')}
           </button>
         </div>
       </Section>

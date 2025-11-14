@@ -1,4 +1,5 @@
 import { DEFAULT_ANNUAL_RETURN, DAYS_PER_MONTH, clamp } from './constants.js';
+import i18n from '../i18n/config.js';
 
 const ALGORITHM_VERSION = 'v2.0';
 
@@ -347,12 +348,14 @@ export function simulateLocally(rawParams = {}) {
   const monthlyPassive =
     Number(monthlyPassiveInput ?? monthlyPassiveIncome ?? rawParams.passiveIncome ?? 0) || 0;
   const dailyExpenseValue = Number(dailyExpense);
-  const annualReturn = Number(annualReturnInput ?? DEFAULT_ANNUAL_RETURN);
-  const months = Math.max(1, Number(monthsInput) || 1);
+  const annualReturn = Number(annualReturnInput ?? 0);
+  const months = Math.min(1200, Math.max(1, Number(monthsInput) || 1200)); // 最多1200个月
   const rng = createRNG(seed);
 
-  const baselineMonthlyMean = annualReturn / 12;
-  const monthlySigma = config.annualVolatility / Math.sqrt(12);
+  // 如果年化收益率为0，则不进行投资计算
+  const hasInvestment = annualReturn > 0;
+  const baselineMonthlyMean = hasInvestment ? annualReturn / 12 : 0;
+  const monthlySigma = hasInvestment ? config.annualVolatility / Math.sqrt(12) : 0;
 
   let currentBalance = initialBalance;
   const baseFixedExpense = dailyExpenseValue * DAYS_PER_MONTH;
@@ -369,9 +372,14 @@ export function simulateLocally(rawParams = {}) {
       baseFixedExpense * (1 + pctIncrease) + effectAggregate.monthlyImpact;
     monthlyFixedExpense = Math.max(monthlyFixedExpense, 0);
 
+    // 如果年化收益率为0，投资收入严格为0
+    let investmentReturn = 0;
+    let sampledReturnRate = 0;
+    if (hasInvestment) {
     const monthlyMean = baselineMonthlyMean + effectAggregate.returnDelta;
-    const sampledReturnRate = clamp(rng.normal(monthlyMean, monthlySigma), -0.99, 1.2);
-    const investmentReturn = currentBalance * sampledReturnRate;
+      sampledReturnRate = clamp(rng.normal(monthlyMean, monthlySigma), -0.99, 1.2);
+      investmentReturn = currentBalance * sampledReturnRate;
+    }
 
     const events = [];
     let eventsSum = 0;
@@ -479,6 +487,363 @@ export function simulateLocally(rawParams = {}) {
       eventPoolVersion: EVENT_POOL_VERSION
     }
   };
+}
+
+/**
+ * 生成精准的财务分析建议
+ * 基于多维度指标组合分析，提供详细且针对性的建议
+ */
+function generateAdvancedSuggestions(metrics) {
+  const {
+    normDays,
+    passiveScore,
+    riskScore,
+    bufferScore,
+    shockResilience,
+    score,
+    daysSupported,
+    monthsToDepletion,
+    months,
+    avgMonthlyNet,
+    avgFixedExpenses,
+    monthlyPassive,
+    lastBalance,
+    initialBalance,
+    balanceTrend,
+    isDepleting,
+    isGrowing,
+    negativeMonthRatio,
+    cashFlowQuality,
+    hasInvestment,
+    annualReturn,
+    investmentContribution,
+    investmentEfficiency,
+    avgMonthlyReturn,
+    expectedMonthlyReturn,
+    actualVol,
+    expectedVol,
+    returnScore,
+    volatilityScore,
+    expenseStability,
+    maxShock,
+    shockBaseline,
+    riskProfile
+  } = metrics;
+
+  const locale = (i18n.language || 'zh').toLowerCase();
+  const isEn = locale.startsWith('en');
+  const formatDays = (days) => {
+    const value = Math.round(days ?? 0);
+    return isEn ? `${value} days` : `${value} 天`;
+  };
+  const formatMonths = (months) => {
+    const value = Math.round(months ?? 0);
+    return isEn ? `${value} months` : `${value} 个月`;
+  };
+  const formatMoney = (amount, decimals = 0) => {
+    const symbol = isEn ? '$' : '¥';
+    const value = Number(amount ?? 0).toFixed(decimals);
+    return `${symbol}${value}`;
+  };
+  const formatPercent = (value, decimals = 1) =>
+    `${(Number(value ?? 0) * 100).toFixed(decimals)}%`;
+  const translate = (zh, en) => (isEn ? en : zh);
+  const riskLabel = (profile) => {
+    const zh = profile === 'conservative' ? '保守' : profile === 'aggressive' ? '激进' : '中性';
+    const en = profile === 'conservative' ? 'conservative' : profile === 'aggressive' ? 'aggressive' : 'neutral';
+    return translate(zh, en);
+  };
+
+  const suggestions = [];
+  const priority = []; // 高优先级建议
+  const warnings = []; // 警告类建议
+  const improvements = []; // 改进建议
+  const positives = []; // 积极反馈
+  const pushPriority = (zh, en) => priority.push(translate(zh, en));
+  const pushWarning = (zh, en) => warnings.push(translate(zh, en));
+  const pushImprovement = (zh, en) => improvements.push(translate(zh, en));
+  const pushPositive = (zh, en) => positives.push(translate(zh, en));
+
+  // ========== 紧急情况分析 ==========
+  if (Number.isFinite(daysSupported) && daysSupported < 90) {
+    const urgencyZh = daysSupported < 30 ? '紧急' : daysSupported < 60 ? '严重' : '警告';
+    const urgencyEn = daysSupported < 30 ? 'Urgent' : daysSupported < 60 ? 'Severe' : 'Warning';
+    const actionZh = daysSupported < 30 ? '寻找额外收入来源或大幅削减支出' : '优化支出结构或增加收入';
+    const actionEn =
+      daysSupported < 30
+        ? 'find additional income or make deep spending cuts'
+        : 'optimize expenses or grow income';
+    pushPriority(
+      `${urgencyZh}：预计仅能支撑 ${formatDays(daysSupported)}（约 ${formatMonths(monthsToDepletion)}）。建议立即采取行动：${actionZh}。`,
+      `${urgencyEn}: runway is only ${formatDays(daysSupported)} (~${formatMonths(monthsToDepletion)}). Take action now: ${actionEn}.`
+    );
+  }
+
+  if (lastBalance <= 0) {
+    // 已删除：资产已耗尽建议
+  }
+
+  // ========== 可支撑天数深度分析 ==========
+  if (normDays < 0.2) {
+    pushWarning(
+      `可支撑时间极短（${formatMonths(monthsToDepletion)}），远低于 18 个月安全标准。当前月均支出 ${formatMoney(avgFixedExpenses)}，建议：1) 建立至少 6 个月应急基金（约 ${formatMoney(avgFixedExpenses * 6)}）；2) 将月支出降低约 ${formatMoney(avgFixedExpenses * 0.2)}；3) 寻找稳定收入来源。`,
+      `Runway is extremely short (${formatMonths(monthsToDepletion)}), far below the 18‑month safety target. Monthly expenses are about ${formatMoney(avgFixedExpenses)}. Recommended: 1) build at least six months of reserves (~${formatMoney(avgFixedExpenses * 6)}); 2) trim expenses by roughly ${formatMoney(avgFixedExpenses * 0.2)}; 3) add stable income streams.`
+    );
+  } else if (normDays < 0.4) {
+    pushWarning(
+      `可支撑时间不足（${formatMonths(monthsToDepletion)}），建议优先建立 3-6 个月应急基金，并逐步延长到 12 个月以上。`,
+      `Runway is limited (${formatMonths(monthsToDepletion)}). Build a 3–6 month emergency fund first, then extend runway to 12+ months.`
+    );
+  } else if (normDays < 0.6) {
+    pushImprovement(
+      `可支撑时间 ${formatMonths(monthsToDepletion)}，接近安全标准。继续积累储备，目标 18 个月（约 ${formatMoney(avgFixedExpenses * 18)}）。`,
+      `Runway is ${formatMonths(monthsToDepletion)}, close to the safety target. Keep saving toward 18 months (~${formatMoney(avgFixedExpenses * 18)}).`
+    );
+  } else if (normDays >= 0.8) {
+    pushPositive(
+      `可支撑时间充足（${formatMonths(monthsToDepletion)}），财务缓冲良好。`,
+      `Runway is healthy (${formatMonths(monthsToDepletion)}); cash buffer looks strong.`
+    );
+  }
+
+  // ========== 被动收入深度分析 ==========
+  if (passiveScore < 0.1) {
+    pushWarning(
+      `被动收入严重不足（每月约 ${formatMoney(monthlyPassive)}，仅覆盖 ${formatPercent(passiveScore)} 固定支出）。建议：1) 探索副业或兼职（目标月增 ${formatMoney(avgFixedExpenses * 0.3)}）；2) 寻找股息、租金等被动收入；3) 打磨技能建立变现渠道。`,
+      `Passive income is very low (~${formatMoney(monthlyPassive)} per month, covering only ${formatPercent(passiveScore)} of fixed costs). Suggested steps: 1) add side gigs/part‑time work (target +${formatMoney(avgFixedExpenses * 0.3)} per month); 2) develop dividend, rental, or royalty income; 3) build monetizable skills.`
+    );
+  } else if (passiveScore < 0.3) {
+    pushImprovement(
+      `被动收入占比偏低（${formatPercent(passiveScore)}），当前每月 ${formatMoney(monthlyPassive)}，目标至少 ${formatMoney(avgFixedExpenses * 0.5)}。逐步建立多元化被动收入来源。`,
+      `Passive income covers only ${formatPercent(passiveScore)} of spending (~${formatMoney(monthlyPassive)} per month). Aim for at least ${formatMoney(avgFixedExpenses * 0.5)} by diversifying income streams.`
+    );
+  } else if (passiveScore < 0.6) {
+    pushImprovement(
+      `被动收入占比中等（${formatPercent(passiveScore)}），可继续提升至覆盖 60% 以上固定支出，增强稳定性。`,
+      `Passive income coverage is moderate (${formatPercent(passiveScore)}). Continue growing it toward 60%+ of fixed expenses to strengthen stability.`
+    );
+  } else if (passiveScore >= 0.8) {
+    pushPositive(
+      `被动收入表现优秀（覆盖 ${formatPercent(passiveScore)} 支出），财务自由度高。`,
+      `Passive income is excellent (${formatPercent(passiveScore)} of expenses); flexibility is strong.`
+    );
+  }
+
+  // ========== 投资分析（仅当有投资时） ==========
+  if (hasInvestment) {
+    // 收益率分析
+    if (returnScore < 0.3) {
+      const deviation = Math.abs(avgMonthlyReturn - expectedMonthlyReturn) / Math.max(Math.abs(expectedMonthlyReturn), 0.001);
+      pushWarning(
+        `投资收益率严重偏离预期：实际月均 ${formatPercent(avgMonthlyReturn, 2)}，预期 ${formatPercent(expectedMonthlyReturn, 2)}，偏差约 ${formatPercent(deviation, 0)}。可能原因：1) 资产配置不当；2) 市场波动异常；3) 风险偏好设置不合理。建议重新评估投资策略，调整资产配置或风险偏好。`,
+        `Investment returns deviate sharply: actual ${formatPercent(avgMonthlyReturn, 2)} vs expected ${formatPercent(expectedMonthlyReturn, 2)} (gap ~${formatPercent(deviation, 0)}). Possible causes: poor allocation, abnormal volatility, or mismatched risk profile. Reassess strategy and asset mix.`
+      );
+    } else if (returnScore < 0.6) {
+      pushImprovement(
+        `投资收益率略低（实际 ${formatPercent(avgMonthlyReturn, 2)} vs 预期 ${formatPercent(expectedMonthlyReturn, 2)}）。建议优化组合、提高低风险资产占比，并定期复盘表现。`,
+        `Investment returns are slightly below target (actual ${formatPercent(avgMonthlyReturn, 2)} vs expected ${formatPercent(expectedMonthlyReturn, 2)}). Optimize allocation, add lower-risk assets, and review performance regularly.`
+      );
+    } else if (returnScore >= 0.8) {
+      pushPositive(
+        `投资收益率表现良好，接近或超过预期目标。`,
+        `Investment returns are on track or better than expected.`
+      );
+    }
+
+    // 波动率分析
+    if (volatilityScore < 0.4) {
+      const volRatio = actualVol / Math.max(expectedVol, 0.001);
+      pushWarning(
+        `投资波动率异常偏高：实际 ${formatPercent(actualVol, 2)}，预期 ${formatPercent(expectedVol, 2)}，为预期的 ${volRatio.toFixed(2)} 倍。建议降低高风险资产占比，增加债券/稳健资产，并用定投平滑波动。`,
+        `Investment volatility is excessive: actual ${formatPercent(actualVol, 2)} vs expected ${formatPercent(expectedVol, 2)} (${volRatio.toFixed(2)}× higher). Reduce high‑risk exposure, add bonds or stable assets, and consider dollar-cost averaging.`
+      );
+    } else if (volatilityScore < 0.7) {
+      pushImprovement(
+        `投资波动率略高，适度降低风险资产配置以提升稳定性。`,
+        `Volatility is slightly elevated. Trim risky positions to improve stability.`
+      );
+    }
+
+    // 投资效率分析
+    if (investmentEfficiency > 0 && investmentEfficiency < 0.5) {
+      pushWarning(
+        `投资效率偏低：投资贡献度 ${formatPercent(investmentContribution, 2)}，实际收益率仅为预期的 ${(investmentEfficiency * 100).toFixed(0)}%。建议分散投资并调整风险配置。`,
+        `Investment efficiency is weak: contribution ${formatPercent(investmentContribution, 2)}, actual returns only ${(investmentEfficiency * 100).toFixed(0)}% of target. Diversify holdings and recalibrate risk.`
+      );
+    } else if (investmentEfficiency >= 1.2) {
+      pushPositive(
+        `投资效率优秀，实际收益率超过预期 ${((investmentEfficiency - 1) * 100).toFixed(0)}%。`,
+        `Investment efficiency is excellent, exceeding expectations by ${((investmentEfficiency - 1) * 100).toFixed(0)}%.`
+      );
+    }
+
+    // 风险匹配分析
+    if (riskScore < 0.4) {
+      pushWarning(
+        `投资风险匹配度低（${formatPercent(riskScore, 0)}），当前风险偏好为“${riskLabel(riskProfile)}”，但实际表现不匹配。请重新评估风险承受力，调整资产配置，并在需要时咨询专业顾问。`,
+        `Risk alignment is weak (${formatPercent(riskScore, 0)}). Declared profile is "${riskLabel(riskProfile)}", but performance doesn’t match. Reassess risk tolerance, realign allocation, and seek professional advice if needed.`
+      );
+    }
+  } else {
+    // 无投资情况分析
+    if (normDays < 0.6 && monthlyPassive < avgFixedExpenses * 0.5) {
+      pushImprovement(
+        `当前未投资且可支撑时间有限。建议先建立 3-6 个月应急基金，再从低风险产品（货币基金、债券基金）起步，目标年化 3-5%，并持续学习投资知识。`,
+        `No investments yet and runway is limited. Build a 3–6 month emergency fund first, then start with low-risk products (cash funds, bond funds) aiming for 3–5% annual return while learning investing basics.`
+      );
+    } else if (normDays >= 0.8 && monthlyPassive >= avgFixedExpenses * 0.5) {
+      pushImprovement(
+        `财务状况良好但尚未投资。可考虑适度配置保守型资产，对抗通胀，目标年化 3-6%。`,
+        `Financial position is solid but no investments yet. Consider moderate, conservative allocations (3–6% target) to offset inflation.`
+      );
+    }
+  }
+
+  // ========== 缓冲资金分析 ==========
+  if (bufferScore < 0.2) {
+    // 已删除具体提示
+  } else if (bufferScore < 0.5) {
+    pushImprovement(
+      `应急缓冲资金不足：目前仅约 ${(bufferScore * 3).toFixed(1)} 个月支出，建议提升至 3 个月以上（约 ${formatMoney(avgFixedExpenses * 3)}）。`,
+      `Emergency reserves are light—only ${(bufferScore * 3).toFixed(1)} months of expenses. Build at least a three‑month buffer (~${formatMoney(avgFixedExpenses * 3)}).`
+    );
+  } else if (bufferScore >= 0.8) {
+    pushPositive(
+      `应急缓冲资金充足（约 ${(bufferScore * 3).toFixed(1)} 个月支出），抗风险能力强。`,
+      `Emergency savings look strong (~${(bufferScore * 3).toFixed(1)} months of expenses).`
+    );
+  }
+
+  // ========== 抗冲击能力分析 ==========
+  if (shockResilience < 0.3) {
+    pushWarning(
+      `抗冲击能力极弱：最大负面事件约 ${formatMoney(maxShock)}，占缓冲基准的 ${formatPercent(maxShock / shockBaseline, 1)}。建议：1) 建立更大应急基金（目标 ${formatMoney(avgFixedExpenses * 6)}）；2) 配置必要保险；3) 避免高风险支出。`,
+      `Shock resilience is very weak: worst event ≈ ${formatMoney(maxShock)}, equal to ${formatPercent(maxShock / shockBaseline, 1)} of your buffer. Build larger reserves (~${formatMoney(avgFixedExpenses * 6)}), add insurance, and avoid high-risk outlays.`
+    );
+  } else if (shockResilience < 0.5) {
+    pushImprovement(
+      `抗冲击能力偏低，可将应急基金提升至 6 个月支出（约 ${formatMoney(avgFixedExpenses * 6)}）应对大额支出。`,
+      `Shock resilience is modest. Grow your emergency fund to roughly six months of expenses (~${formatMoney(avgFixedExpenses * 6)}) to handle major events.`
+    );
+  } else if (shockResilience >= 0.7) {
+    pushPositive(
+      `抗冲击能力良好，能够应对大部分突发事件。`,
+      `Shock resilience is solid; you can handle most unexpected events.`
+    );
+  }
+
+  // ========== 资产趋势分析 ==========
+  if (isDepleting && balanceTrend < -0.3) {
+    // 已删除：资产快速消耗建议
+  } else if (isDepleting) {
+    pushImprovement(
+      `资产呈下降趋势（下降 ${(Math.abs(balanceTrend) * 100).toFixed(1)}%），请优化收支结构，目标实现月度收支平衡或小幅盈余。`,
+      `Assets are trending down (${(Math.abs(balanceTrend) * 100).toFixed(1)}% drop). Tighten the budget and aim for at least break-even cash flow.`
+    );
+  } else if (isGrowing && balanceTrend > 0.2) {
+    pushPositive(
+      `资产稳步增长（增长 ${(balanceTrend * 100).toFixed(1)}%），财务状况良好。`,
+      `Assets are growing steadily (${(balanceTrend * 100).toFixed(1)}%); great momentum.`
+    );
+  }
+
+  // ========== 现金流质量分析 ==========
+  if (cashFlowQuality < 0.3) {
+    // 已删除：现金流质量差建议
+  } else if (cashFlowQuality < 0.6) {
+    pushImprovement(
+      `现金流稳定性待提升：${(negativeMonthRatio * 100).toFixed(0)}% 的月份为负值，建议优化收入结构并提升正现金流比例。`,
+      `Cash flow stability needs work—${(negativeMonthRatio * 100).toFixed(0)}% of months show negative cash flow. Improve income mix and lift the share of positive months.`
+    );
+  } else if (cashFlowQuality >= 0.8) {
+    pushPositive(
+      `现金流质量优秀，大部分月份保持正现金流。`,
+      `Cash flow quality is excellent; most months stay positive.`
+    );
+  }
+
+  // ========== 支出稳定性分析 ==========
+  if (expenseStability < 0.5) {
+    pushImprovement(
+      `支出波动较大，建议建立预算制度，将月度波动控制在 20% 以内。`,
+      `Spending is volatile. Build a budget system and target <20% month-to-month swings.`
+    );
+  } else if (expenseStability >= 0.8) {
+    pushPositive(
+      `支出稳定性良好，预算控制有效。`,
+      `Spending stability is solid; budgeting looks effective.`
+    );
+  }
+
+  // ========== 综合评分建议 ==========
+  if (score < 40) {
+    pushPriority(
+      `综合评分 ${score} 分，财务状况处于危险区。请立即建立应急基金、优化收支结构，并考虑寻求专业建议。`,
+      `Overall score ${score} indicates high financial risk. Build emergency savings, fix cash flow, and consider professional guidance immediately.`
+    );
+  } else if (score < 60) {
+    pushWarning(
+      `综合评分 ${score} 分，需要优先解决高风险问题并逐步提升指标。`,
+      `Score ${score} needs improvement—tackle the highest-risk areas first and lift each metric gradually.`
+    );
+  } else if (score < 80) {
+    pushImprovement(
+      `综合评分 ${score} 分，表现良好但仍有提升空间，继续优化以冲刺 80 分以上。`,
+      `Score ${score} is good but not yet top-tier. Keep optimizing toward 80+.`
+    );
+  } else {
+    pushPositive(
+      `综合评分 ${score} 分，财务状况优秀，继续保持良好习惯。`,
+      `Score ${score} is excellent. Keep up the good habits.`
+    );
+  }
+
+  // ========== 组合建议（基于多指标交叉分析） ==========
+  
+  // 高风险组合：低可支撑天数 + 低被动收入 + 资产下降
+  if (normDays < 0.4 && passiveScore < 0.3 && isDepleting) {
+    pushPriority(
+      `⚠️ 高风险组合：可支撑时间短、被动收入不足且资产下降。请立即削减非必要支出、寻找额外收入（兼职/副业）、考虑出售非必要资产，并寻求专业规划建议。`,
+      `⚠️ High-risk combo: short runway, weak passive income, and declining assets. Slash discretionary spending, add side income, consider selling non-essential assets, and get professional planning help.`
+    );
+  }
+
+  // 投资优化组合：有投资但表现不佳 + 可支撑时间有限
+  if (hasInvestment && riskScore < 0.5 && normDays < 0.6) {
+    pushWarning(
+      `投资表现不佳且可支撑时间有限。建议：1) 降低投资风险，优先保证本金；2) 将部分资金转为应急基金；3) 采用更保守策略。`,
+      `Investments underperform while runway is short. Lower risk to protect capital, redirect some funds to emergency reserves, and use more conservative strategies.`
+    );
+  }
+
+  // 良好基础但需优化：可支撑时间充足但被动收入不足
+  if (normDays >= 0.6 && passiveScore < 0.4) {
+    pushImprovement(
+      `基础良好但被动收入偏低。保持储备的同时，重点发展新的被动收入渠道，提升自由度。`,
+      `Runway is solid but passive income is light. Keep savings intact and focus on building additional passive income streams.`
+    );
+  }
+
+  // ========== 按优先级排序并返回 ==========
+  const allSuggestions = [
+    ...priority.map(s => `🔴 ${s}`),
+    ...warnings.map(s => `🟠 ${s}`),
+    ...improvements.map(s => `🟡 ${s}`),
+    ...positives.map(s => `🟢 ${s}`)
+  ];
+
+  // 如果没有建议，提供通用建议
+  if (allSuggestions.length === 0) {
+    allSuggestions.push(
+      translate(
+        '财务结构稳健，建议继续保持良好的财务习惯，定期复盘和优化。',
+        'Financial structure looks healthy. Keep your current habits and review them regularly.'
+      )
+    );
+  }
+
+  // 限制建议数量，优先显示最重要的
+  return allSuggestions.slice(0, 12); // 最多返回12条建议
 }
 
 export function buildStatsFromSummaries(
@@ -607,22 +972,80 @@ export function buildStatsFromSummaries(
     )
   );
 
-  const suggestions = [];
-  if (normDays < 0.4) {
-    suggestions.push('提升可支撑天数：优化支出或增加储备。');
-  }
-  if (passiveScore < 0.4) {
-    suggestions.push('被动收入占比偏低，可探索稳定现金流来源。');
-  }
-  if (riskScore < 0.5) {
-    suggestions.push('投资回报与风险偏好不匹配，建议重新评估资产配置。');
-  }
-  if (shockResilience < 0.5) {
-    suggestions.push('近期负面事件冲击较大，可建立应急金。');
-  }
-  if (!suggestions.length) {
-    suggestions.push('财务结构较稳健，保持定期复盘与纪律性投入。');
-  }
+  // 计算额外分析指标
+  const hasInvestment = annualReturn > 0;
+  const totalNegativeMonths = monthlyNetValues.filter((v) => v < 0).length;
+  const negativeMonthRatio = totalNegativeMonths / months;
+  const balanceTrend = months > 1 ? (last.balanceAfter - summaries[0].balanceBefore) / summaries[0].balanceBefore : 0;
+  const avgMonthlyExpenseRatio = avgFixedExpenses / (summaries[0]?.balanceBefore || 1);
+  const monthsToDepletion = Number.isFinite(daysSupported) ? daysSupported / DAYS_PER_MONTH : Infinity;
+  const isDepleting = balanceTrend < -0.1; // 资产下降超过10%
+  const isGrowing = balanceTrend > 0.1; // 资产增长超过10%
+  
+  // 计算投资相关指标
+  const totalInvestmentReturn = summaries.reduce((sum, s) => sum + (s.investmentReturn || 0), 0);
+  const investmentContribution = summaries[0]?.balanceBefore > 0 
+    ? totalInvestmentReturn / summaries[0].balanceBefore 
+    : 0;
+  const investmentEfficiency = hasInvestment && avgMonthlyReturn > 0 
+    ? (avgMonthlyReturn / expectedMonthlyReturn) 
+    : 0;
+
+  // 计算支出稳定性
+  const expenseVolatility = standardDeviation(summaries.map((s) => s.fixedExpenses));
+  const expenseStability = avgFixedExpenses > 0 
+    ? 1 - clamp(expenseVolatility / avgFixedExpenses, 0, 1) 
+    : 1;
+
+  // 计算现金流质量
+  const positiveMonths = monthlyNetValues.filter((v) => v > 0).length;
+  const cashFlowQuality = positiveMonths / months;
+
+  // 生成精准建议
+  const suggestions = generateAdvancedSuggestions({
+    // 核心指标
+    normDays,
+    passiveScore,
+    riskScore,
+    bufferScore,
+    shockResilience,
+    score,
+    
+    // 详细指标
+    daysSupported,
+    monthsToDepletion,
+    months,
+    avgMonthlyNet,
+    avgFixedExpenses,
+    monthlyPassive,
+    lastBalance: last.balanceAfter,
+    initialBalance: summaries[0].balanceBefore,
+    
+    // 趋势指标
+    balanceTrend,
+    isDepleting,
+    isGrowing,
+    negativeMonthRatio,
+    cashFlowQuality,
+    
+    // 投资指标
+    hasInvestment,
+    annualReturn,
+    investmentContribution,
+    investmentEfficiency,
+    avgMonthlyReturn,
+    expectedMonthlyReturn,
+    actualVol,
+    expectedVol,
+    returnScore,
+    volatilityScore,
+    
+    // 其他指标
+    expenseStability,
+    maxShock,
+    shockBaseline,
+    riskProfile
+  });
 
   return {
     daysSupported: Number.isFinite(daysSupported) ? daysSupported : Number.POSITIVE_INFINITY,

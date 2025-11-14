@@ -15,20 +15,23 @@ import {
   AreaChart,
   Area
 } from 'recharts';
+import { useTranslation } from 'react-i18next';
+import { formatCurrency } from '../utils/currency.js';
 
 const COLORS = ['#F59E0B', '#6D28D9', '#10B981', '#EF4444', '#3B82F6'];
 
 export function BalanceTrend({ data }) {
+  const { t } = useTranslation();
   return (
     <div className="glass rounded-2xl p-4">
-      <div className="font-semibold mb-2">余额趋势</div>
+      <div className="font-semibold mb-2">{t('result.balanceTrend')}</div>
       <ResponsiveContainer width="100%" height={260}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
           <XAxis dataKey="month" stroke="#E6E6E6" />
           <YAxis stroke="#E6E6E6" />
-          <Tooltip />
-          <Line type="monotone" dataKey="balanceAfter" name="余额" stroke="#F59E0B" strokeWidth={2} />
+          <Tooltip formatter={(value) => formatCurrency(value)} />
+          <Line type="monotone" dataKey="balanceAfter" name={t('bubble.balance')} stroke="#F59E0B" strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -36,18 +39,19 @@ export function BalanceTrend({ data }) {
 }
 
 export function IncomeExpenseBars({ data }) {
+  const { t } = useTranslation();
   return (
     <div className="glass rounded-2xl p-4">
-      <div className="font-semibold mb-2">收入/支出</div>
+      <div className="font-semibold mb-2">{t('result.incomeExpense')}</div>
       <ResponsiveContainer width="100%" height={260}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
           <XAxis dataKey="month" stroke="#E6E6E6" />
           <YAxis stroke="#E6E6E6" />
-          <Tooltip />
+          <Tooltip formatter={(value) => formatCurrency(value)} />
           <Legend />
-          <Bar dataKey="passiveIncome" name="被动收入" fill="#10B981" />
-          <Bar dataKey="fixedExpenses" name="固定支出" fill="#EF4444" />
+          <Bar dataKey="passiveIncome" name={t('bubble.passiveIncome')} fill="#10B981" />
+          <Bar dataKey="fixedExpenses" name={t('bubble.fixedExpense')} fill="#EF4444" />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -55,11 +59,12 @@ export function IncomeExpenseBars({ data }) {
 }
 
 export function ExpenseStructurePie({ breakdown }) {
+  const { t } = useTranslation();
   const entries = Object.entries(breakdown || {}).map(([name, value]) => ({ name, value }));
   const total = entries.reduce((sum, item) => sum + (item.value || 0), 0);
   return (
     <div className="glass rounded-2xl p-4 overflow-hidden">
-      <div className="font-semibold mb-2">支出结构</div>
+      <div className="font-semibold mb-2">{t('result.expenseStructure')}</div>
       <ResponsiveContainer width="100%" height={220}>
         <PieChart>
           <Pie
@@ -75,7 +80,7 @@ export function ExpenseStructurePie({ breakdown }) {
               <Cell key={index} fill={COLORS[index % COLORS.length]} />
             ))}
           </Pie>
-          <Tooltip />
+          <Tooltip formatter={(value) => formatCurrency(value)} />
         </PieChart>
       </ResponsiveContainer>
       {entries.length > 0 && (
@@ -91,7 +96,7 @@ export function ExpenseStructurePie({ breakdown }) {
                 />
                 <span className="truncate">{entry.name}</span>
                 <span className="ml-auto text-white">
-                  ¥{entry.value.toFixed(2)} <span className="text-slate-400">({percentage}%)</span>
+                  {formatCurrency(entry.value)} <span className="text-slate-400">({percentage}%)</span>
                 </span>
               </div>
             );
@@ -103,6 +108,7 @@ export function ExpenseStructurePie({ breakdown }) {
 }
 
 export function CashflowTrend({ data }) {
+  const { t } = useTranslation();
   const formatted = (data || []).map((item) => ({
     month: item.month,
     netCashflow: Number(item.monthNet?.toFixed?.(2) ?? item.monthNet ?? 0),
@@ -111,7 +117,7 @@ export function CashflowTrend({ data }) {
 
   return (
     <div className="glass rounded-2xl p-4">
-      <div className="font-semibold mb-2">净现金流走势</div>
+      <div className="font-semibold mb-2">{t('result.cashflowTrend')}</div>
       <ResponsiveContainer width="100%" height={220}>
         <AreaChart data={formatted}>
           <defs>
@@ -127,12 +133,12 @@ export function CashflowTrend({ data }) {
           <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.1)" />
           <XAxis dataKey="month" stroke="#E6E6E6" />
           <YAxis stroke="#E6E6E6" />
-          <Tooltip />
+          <Tooltip formatter={(value) => formatCurrency(value)} />
           <Legend />
           <Area
             type="monotone"
             dataKey="netCashflow"
-            name="本月净现金流"
+            name={t('result.monthNetCashflow')}
             stroke="#10B981"
             fill="url(#netFlowGradient)"
             strokeWidth={2}
@@ -140,7 +146,7 @@ export function CashflowTrend({ data }) {
           <Area
             type="monotone"
             dataKey="cumulative"
-            name="期末余额"
+            name={t('result.endBalance')}
             stroke="#3B82F6"
             fill="url(#cumulativeGradient)"
             strokeWidth={2}

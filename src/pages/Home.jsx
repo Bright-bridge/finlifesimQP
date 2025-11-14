@@ -1,70 +1,70 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Section from '../components/Section.jsx';
 import { ShieldCheck, LineChart, Coins } from 'lucide-react';
 
 export default function Home() {
+  const { t } = useTranslation();
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
     name: 'Financial Life Simulator',
-    url: 'https://yourdomain.example',
+    url: 'https://finlifesim.com',
     description:
       '输入储蓄与支出，模拟辞职后资金可支撑时间并生成理财建议（仅供参考）'
   };
   return (
     <div className="space-y-6">
       <Helmet>
-        <title>首页 | Financial Life Simulator - 理财教育与预算规划</title>
+        <title>{t('home.title')} | {t('common.appName')}</title>
         <meta
           name="description"
-          content="个人财务生存与理财模拟器：输入储蓄、支出、被动收入与年化收益率，生成未来月度资金变化与理财建议，适用于预算规划与风险教育。"
+          content={t('home.subtitle')}
         />
         <script type="application/ld+json">{JSON.stringify(ld)}</script>
       </Helmet>
       <Section className="text-center">
-        <h1 className="text-3xl md:text-4xl font-bold mb-3">Financial Life Simulator</h1>
+        <h1 className="text-3xl md:text-4xl font-bold mb-3">{t('common.appName')}</h1>
         <p className="text-slate-300 max-w-2xl mx-auto">
-          Financial Life Simulator 是一款面向个人用户的财务模拟工具。输入你的储蓄、每月支出与被动收入，
-          系统将基于可配置的年化收益与随机生活事件，模拟未来数月资金变化并提供量化的理财建议。
-          该工具仅用于教育与规划参考，不构成投资建议。
+          {t('home.subtitle')}
         </p>
         <div className="mt-6 flex items-center justify-center gap-4">
           <Link
             to="/calculator"
             className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-5 py-3 rounded-lg transition transform hover:scale-[1.02]"
           >
-            立即开始
+            {t('home.startNow')}
           </Link>
           <Link
             to="/articles"
             className="px-5 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition"
           >
-            阅读理财文章
+            {t('home.readArticles')}
           </Link>
         </div>
       </Section>
       <Section className="max-w-5xl mx-auto" delay={0.08}>
         <div className="space-y-6">
           <div className="text-center">
-            <h2 className="font-semibold text-xl md:text-2xl">为什么选择本工具</h2>
+            <h2 className="font-semibold text-xl md:text-2xl">{t('home.whyChoose')}</h2>
           </div>
           <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-6 justify-items-center">
             {[
               {
                 icon: ShieldCheck,
-                title: '合规与透明',
-                desc: '清晰的数据来源标记、隐私与免责声明页面，更适用于审核与教育用途。'
+                title: t('home.compliance'),
+                desc: t('home.complianceDesc')
               },
               {
                 icon: LineChart,
-                title: '量化可视化',
-                desc: '月度结余、趋势与结构图一体展示，帮助建立现金流与风险的直观认知。'
+                title: t('home.visualization'),
+                desc: t('home.visualizationDesc')
               },
               {
                 icon: Coins,
-                title: '贴近现实',
-                desc: '固定支出、投资收益与随机事件并行模拟，支持不同风险偏好配置。'
+                title: t('home.realistic'),
+                desc: t('home.realisticDesc')
               }
             ].map((f, i) => {
               const Icon = f.icon;

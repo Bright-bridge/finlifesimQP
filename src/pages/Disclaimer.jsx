@@ -1,18 +1,19 @@
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import Section from '../components/Section.jsx';
 
 export default function Disclaimer() {
+  const { t } = useTranslation();
   return (
     <div className="space-y-5">
       <Helmet>
-        <title>免责声明 | Financial Life Simulator</title>
-        <meta name="description" content="免责声明：仅为模拟与教育参考，不构成投资建议。" />
+        <title>{t('disclaimer.title')} | {t('common.appName')}</title>
+        <meta name="description" content={t('disclaimer.title')} />
       </Helmet>
-      <Section><h1 className="text-3xl font-bold">免责声明</h1></Section>
+      <Section><h1 className="text-3xl font-bold">{t('disclaimer.title')}</h1></Section>
       <Section delay={0.06}>
-        <div className="glass rounded-2xl p-4 space-y-3">
-          <p>本工具仅为模拟器，不构成任何投资或法律建议。请在做出重要财务决策前咨询专业人士。</p>
-          <p>所有内容均基于公开常识与简化模型，可能与实际情况存在差异。</p>
+        <div className="glass rounded-2xl p-4 space-y-4 whitespace-pre-line">
+          <p className="text-slate-300">{t('disclaimer.content')}</p>
         </div>
       </Section>
     </div>

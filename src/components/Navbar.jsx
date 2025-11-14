@@ -1,20 +1,28 @@
 import { Link, NavLink, useLocation } from 'react-router-dom';
-
-const navItems = [
-  { to: '/', label: '首页' },
-  { to: '/calculator', label: '预算计算器' },
-  { to: '/articles', label: '理财文章' },
-  { to: '/about', label: '关于' }
-];
+import { useTranslation } from 'react-i18next';
 
 export default function Navbar() {
   const location = useLocation();
+  const { t, i18n } = useTranslation();
+  
+  const navItems = [
+    { to: '/', labelKey: 'nav.home' },
+    { to: '/calculator', labelKey: 'nav.calculator' },
+    { to: '/articles', labelKey: 'nav.articles' },
+    { to: '/about', labelKey: 'nav.about' }
+  ];
+
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    localStorage.setItem('language', lng);
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-slate-900/70 backdrop-blur border-b border-white/10">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <Link to="/" aria-label="返回首页" className="flex items-center gap-2">
+        <Link to="/" aria-label={t('nav.backToHome')} className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-amber-500"></div>
-          <span className="font-semibold tracking-wide">Financial Life Simulator</span>
+          <span className="font-semibold tracking-wide">{t('common.appName')}</span>
         </Link>
         <nav className="flex items-center gap-4">
           {navItems.map((n) => (
@@ -29,14 +37,36 @@ export default function Navbar() {
                 }`
               }
             >
-              {n.label}
+              {t(n.labelKey)}
             </NavLink>
           ))}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => changeLanguage('zh')}
+              className={`px-2 py-1 rounded text-sm transition ${
+                i18n.language === 'zh'
+                  ? 'bg-amber-500 text-black font-semibold'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              中文
+            </button>
+            <button
+              onClick={() => changeLanguage('en')}
+              className={`px-2 py-1 rounded text-sm transition ${
+                i18n.language === 'en'
+                  ? 'bg-amber-500 text-black font-semibold'
+                  : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              EN
+            </button>
+          </div>
           <Link
             to="/calculator"
             className="bg-amber-500 hover:bg-amber-600 text-black font-semibold px-4 py-2 rounded-lg transition transform hover:scale-[1.02]"
           >
-            开始模拟
+            {t('common.startSimulation')}
           </Link>
         </nav>
       </div>
