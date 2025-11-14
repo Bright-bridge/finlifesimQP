@@ -10,8 +10,8 @@ i18n
       zh: { translation: zh },
       en: { translation: en }
     },
-    lng: localStorage.getItem('language') || 'zh', // 默认中文
-    fallbackLng: 'zh',
+    lng: localStorage.getItem('language') || 'en', // 默认中文
+    fallbackLng: 'en',
     interpolation: {
       escapeValue: false
     }
